@@ -495,7 +495,7 @@ class Sudoku(object):
         return None
         
 s = Sudoku()
-s.load("puzzle_mild.txt")
+s.load("test.txt")
 solution = s.solve()
 if(solution):
     s.save("solution.txt", solution)
