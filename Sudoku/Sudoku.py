@@ -1,8 +1,3 @@
-""" Solves a Sudoku puzzle using a genetic algorithm. This is based on a piece of coursework produced by Christian Thomas Jacobs as part of the CS3M6 Evolutionary Computation module at the University of Reading.
-
-Copyright (c) 2009, 2017 Christian Thomas Jacobs
-"""
-
 import numpy
 import random
 random.seed()
@@ -411,7 +406,7 @@ class Sudoku(object):
             next_population = []
 
             # Select elites (the fittest candidates) and preserve them for the next generation.
-            self.population.sort()
+            self.population.sorted()
             elites = []
             for e in range(0, Ne):
                 elite = Candidate()
@@ -475,7 +470,7 @@ class Sudoku(object):
             phi = 0
 
             # Check for stale population.
-            self.population.sort()
+            self.population.sorted()
             if(self.population.candidates[0].fitness != self.population.candidates[1].fitness):
                 stale = 0
             else:
