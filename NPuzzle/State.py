@@ -1,11 +1,10 @@
 class State:
-    goal = [1, 2, 3, 4, 5, 6, 7, 8, 0] 
+    goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
     #this should be changed manually based on n 
     #e.g. it should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] if n is 4.
     
-    greedy_evaluation = None
-    AStar_evaluation = None
-    heuristic = None
+    bestSF_evaluation = None
+
     def __init__(self, state, parent, direction, depth, cost):
         self.state = state
         self.parent = parent
