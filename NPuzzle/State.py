@@ -1,7 +1,5 @@
 class State:
 
-    #this should be changed manually based on n 
-    #e.g. it should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] if n is 4.
     
     bestFS_evaluation = None
 
@@ -17,11 +15,7 @@ class State:
 
         else:
             self.cost = cost
-
-        
-
-
-      
+    
 
 
     def test(self): #check if the given state is goal
@@ -44,7 +38,7 @@ class State:
         return self.bestFS_evaluation
 
 
-    #heuristic function based on number of misplaced tiles
+
 
 
 

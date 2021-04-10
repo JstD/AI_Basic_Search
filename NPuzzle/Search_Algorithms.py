@@ -6,14 +6,38 @@ from queue import LifoQueue
 
 #Depth-first Search with limited depth
 
- 
+#Depth-first Search not heuristic function 
+# def DFS(given_state , n): 
+#     root = State(given_state, None, None, 0, 0, n)
+#     if root.test():
+#         return root.solution()
+#     frontier = LifoQueue()
+#     frontier.put(root)
+#     explored = []
+    
+#     while not(frontier.empty()):
+#         current_node = frontier.get()
+#         max_depth = current_node.depth #current depth
+#         explored.append(current_node.state)
+        
+#         if max_depth == 30:
+#             continue #go to the next branch
+
+#         children = current_node.expand(n)
+#         for child in children:
+#             if child.state not in explored:
+#                 if child.test():
+#                     return child.solution(), len(explored)
+#                 frontier.put(child)
+#     return (("Couldn't find solution in the limited depth."), len(explored))
+
+#Depth-first Search has heuristic function 
 def DFS(given_state , n):
     frontier = PriorityQueue()
     explored = [] 
     counter = 0
     root = State(given_state, None, None, 0, 0, n)
-    #root.evaluation()
-    evaluation = root.Manhattan_Distance(n) #we can use Misplaced_Tiles() instead.
+    evaluation = root.Manhattan_Distance(n) 
     frontier.put((evaluation, counter, root)) #based on bestFS evaluation
 
     while not frontier.empty():
@@ -28,7 +52,7 @@ def DFS(given_state , n):
         for child in children:
             if child.state not in explored:
                 counter += 1
-                evaluation = child.Manhattan_Distance(n) #we can use Misplaced_Tiles() instead.
+                evaluation = child.Manhattan_Distance(n) 
                 frontier.put((evaluation, counter, child)) #based on bestFS evaluation
     return
 
