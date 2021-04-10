@@ -74,13 +74,16 @@ if solvable(root):
     time2 = time()
     DFS_solution = DFS(root, n)
     DFS_time = time() - time2
-    print('DFS Solution is ')
-    for i in range(len(DFS_solution[0])):
-        print(DFS_solution[0][i],' ',DFS_solution[1][i],"\n")
-        for x in range(n):
-            print (DFS_solution[1][i][x*n:x*n+n])
+    if DFS_solution[3] == True:
+        print('DFS Solution is ')
+        for i in range(len(DFS_solution[0])):
+            print(DFS_solution[0][i],' ',DFS_solution[1][i],"\n")
+            for x in range(n):
+                print (DFS_solution[1][i][x*n:x*n+n])
 
-        print("\n")    
+            print("\n")    
+    else:
+        print('DFS Solution is ', DFS_solution[0])
 
     print('Number of explored nodes is ', DFS_solution[2])
     print('DFS Time:', DFS_time, "\n")  
