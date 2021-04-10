@@ -1,6 +1,6 @@
 # N-Puzzle-solver-with-Search-Algorithms
 
-N-puzzle solver with Search Algorithms including: DFS (with limited depth), Greedy 
+N-puzzle solver with Search Algorithms including: DFS (with limited depth), Greedy 1
 
 
 There are 2 heuristics for Greedy and A* algorithms. The first one evaluates states with manhattan distance and the second one evaluates states with number of misplaced tiles. 

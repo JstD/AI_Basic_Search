@@ -1,24 +1,29 @@
 class State:
-    goal = [1, 2, 3, 4, 5, 6, 7, 8, 0]
+
     #this should be changed manually based on n 
     #e.g. it should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0] if n is 4.
     
-    bestSF_evaluation = None
+    bestFS_evaluation = None
 
-    def __init__(self, state, parent, direction, depth, cost):
+                
+    def __init__(self, state, parent, direction, depth, cost,n):
         self.state = state
         self.parent = parent
         self.direction = direction
         self.depth = depth
-
+        self.goal = [x for x in range(1,n*n)] +[0]
         if parent:
             self.cost = parent.cost + cost
 
         else:
             self.cost = cost
 
-            
-            
+        
+
+
+      
+
+
     def test(self): #check if the given state is goal
         if self.state == self.goal:
             return True
@@ -33,10 +38,10 @@ class State:
             #manhattan distance between the current state and goal state
             self.heuristic = self.heuristic + distance/n + distance%n
 
-        self.greedy_evaluation = self.heuristic    
-        self.AStar_evaluation = self.heuristic + self.cost
+        self.bestFS_evaluation = self.heuristic    
+ 
         
-        return( self.greedy_evaluation, self.AStar_evaluation)
+        return self.bestFS_evaluation
 
 
     #heuristic function based on number of misplaced tiles
@@ -78,7 +83,7 @@ class State:
                 temp[x], temp[x + n] = temp[x + n], temp[x]
         
         
-            children.append(State(temp, self, direction, self.depth + 1, 1)) #depth should be changed as children are produced
+            children.append(State(temp, self, direction, self.depth + 1, 1,n)) #depth should be changed as children are produced
         return children
 
     
@@ -90,7 +95,21 @@ class State:
         while path.parent != None:
             path = path.parent
             solution.append(path.direction)
+
         solution = solution[:-1]
         solution.reverse()
         return solution
+
+    def current_state(self):
+        state = []
+        state.append(self.state)
+        path = self
+        while path.parent != None:
+            path = path.parent
+            state.append(path.state)
+
+        state = state[:-1]
+        state.reverse()
+        return state
+
          
