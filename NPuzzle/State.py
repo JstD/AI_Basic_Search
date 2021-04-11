@@ -47,7 +47,7 @@ class State:
     
     #this would remove illegal moves for a given state
     def available_moves(x,n): 
-        moves = ['Left', 'Right', 'Up', 'Down']
+        moves = ['Left', 'Right', 'Up', 'Down']#direction move of element '0'
         if x % n == 0:
             moves.remove('Left')
         if x % n == n-1:
@@ -93,7 +93,7 @@ class State:
         solution = solution[:-1]
         solution.reverse()
         return solution
-
+    #gets the given state and returns it's state + it's parent's direction till there is no parent
     def current_state(self):
         state = []
         state.append(self.state)

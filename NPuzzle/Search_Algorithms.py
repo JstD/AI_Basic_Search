@@ -14,13 +14,12 @@ def DFS(given_state , n):
     frontier = LifoQueue()
     frontier.put(root)
     explored = []
-    
+    check_ = False
     while not(frontier.empty()):
         current_node = frontier.get()
         max_depth = current_node.depth #current depth
-        explored.append(current_node.state)
-        check_ = False
-        if max_depth == 10:
+        explored.append(current_node.state)        
+        if max_depth == 40:
             continue #go to the next branch
 
         children = current_node.expand(n)

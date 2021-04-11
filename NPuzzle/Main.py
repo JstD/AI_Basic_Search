@@ -1,8 +1,10 @@
-from Search_Algorithms import DFS #BFS, DFS, Greedy, AStar_search
+from Search_Algorithms import DFS 
+#from Search_Algorithms import BFS 
 import random
-#initial state
+
 n = int(input("Enter n\n"))
 print("Enter your" ,n,"*",n, "puzzle")
+#random initial state solvable function
 def num_of_invers(lst,n):
     num_of_invers = 0
     for i in range(n*n):
@@ -12,7 +14,7 @@ def num_of_invers(lst,n):
             if lst[j]!=0 and lst[j]<lst[i]:
                 num_of_invers +=1
     return num_of_invers
-
+#check if initial state puzzle is solvable: number of inversions should be even.
 def is_good_init(lst,n):
     '''If N is odd, then puzzle instance is solvable 
     if number of inversions is even in the input state.'''
@@ -57,42 +59,47 @@ def inv_num(puzzle):
                 inv += 1
     return inv
 
-def solvable(puzzle): #check if initial state puzzle is solvable: number of inversions should be even.
-    inv_counter = inv_num(puzzle)
-    if (inv_counter %2 ==0):
-        return True
-    return False
 
 
-#1,8,2,0,4,3,7,6,5 is solvable
-#2,1,3,4,5,6,7,8,0 is not solvable
 
 from time import time
 
-if solvable(root):
 
-    time2 = time()
-    DFS_solution = DFS(root, n)
-    DFS_time = time() - time2
-    if DFS_solution[3] == True:
-        print('DFS Solution is ')
-        for i in range(len(DFS_solution[0])):
-            print(DFS_solution[0][i],' ',DFS_solution[1][i],"\n")
-            for x in range(n):
-                print (DFS_solution[1][i][x*n:x*n+n])
+#DFS
+time2 = time()
+DFS_solution = DFS(root, n)
+DFS_time = time() - time2
+if DFS_solution[3] == True:
+    print('DFS Solution is ')
+    for i in range(len(DFS_solution[0])):
+        print(DFS_solution[0][i],' ',DFS_solution[1][i],"\n")
+        for x in range(n):
+            print (DFS_solution[1][i][x*n:x*n+n])
 
-            print("\n")    
-    else:
-        print('DFS Solution is ', DFS_solution[0])
-
-    print('Number of explored nodes is ', DFS_solution[2])
-    print('DFS Time:', DFS_time, "\n")  
-
-
-
-    
+        print("\n")    
 else:
-    print("Not solvable")
+    print('DFS Solution is ', DFS_solution[0])
+
+print('Number of explored nodes is ', DFS_solution[2])
+print('DFS Time:', DFS_time, "\n")  
+#BFS (main function for BFS)
+    # time2 = time()
+    # DFS_solution = DFS(root, n)
+    # DFS_time = time() - time2
+
+    # print('DFS Solution is ')
+    # for i in range(len(DFS_solution[0])):
+    #     print(DFS_solution[0][i],' ',DFS_solution[1][i],"\n")
+    #     for x in range(n):
+    #         print (DFS_solution[1][i][x*n:x*n+n])
+
+    #     print("\n")    
+
+    # print('Number of explored nodes is ', DFS_solution[2])
+    # print('DFS Time:', DFS_time, "\n")  
+
+
+
 
 
 
