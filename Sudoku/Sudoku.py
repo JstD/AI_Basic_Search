@@ -1,7 +1,7 @@
 import numpy
 import random
 random.seed()
-
+from random import sample
 Nd = 9  # Number of digits (in the case of standard Sudoku puzzles, this is 9).
 
 
@@ -206,7 +206,6 @@ class Given(Candidate):
 
 class Tournament(object):
     """ The crossover function requires two parents to be selected from the population pool. The Tournament class is used to do this.
-
     Two individuals are selected from the population pool and a random number in [0, 1] is chosen. If this number is less than the 'selection rate' (e.g. 0.85), then the fitter individual is selected; otherwise, the weaker one is selected.
     """
 
@@ -381,6 +380,7 @@ class Sudoku(object):
                 if(fitness == 1):
                     print("Solution found at generation %d!" % generation)
                     print(self.population.candidates[c].values)
+                    print(self.population.candidates[c].values, file=open("solution.txt", "a"))
                     return self.population.candidates[c]
 
                 # Find the best fitness.
@@ -478,9 +478,43 @@ class Sudoku(object):
         print("No solution found.")
         return None
 
+class Puzzle(object):
+    def __init__(self):
+        return
+    def pattern(self, r, c):    
+        return (3*(r%3)+r//3+c)%Nd
+    
+    def shuffle(self, s): 
+        return sample(s,len(s)) 
+    def puzzle(self):
+        base  = 3
+        side  = base*base
+        rBase = range(base) 
+        rows  = [ g*base + r for g in self.shuffle(rBase) for r in self.shuffle(rBase) ] 
+        cols  = [ g*base + c for g in self.shuffle(rBase) for c in self.shuffle(rBase) ]
+        nums  = self.shuffle(range(1,base*base+1))
+        # produce board using randomized baseline pattern
+        board = [ [nums[self.pattern(r,c)] for c in cols] for r in rows ]
+
+        squares = side*side
+        empties = squares * 3//4
+        for p in sample(range(squares),empties):
+            board[p//side][p%side] = 0
+
+        numSize = len(str(side))
+        for line in board: 
+            print("["+" ".join(f"{n or '0':{numSize}}" for n in line) + "]")
+            print(" ".join(f"{n or '0':{numSize}}" for n in line) , file=open("puzzle_mild.txt", "a"))
+
+file = open("puzzle_mild.txt","w")
+file.close()
+
+p = Puzzle()
+p1 = p.puzzle()
+
+file = open("solution.txt","w")
+file.close()
 
 s = Sudoku()
 s.load("puzzle_mild.txt")
 solution = s.solve()
-if(solution):
-    s.save("solution.txt", solution)
