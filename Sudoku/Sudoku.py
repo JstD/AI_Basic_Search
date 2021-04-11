@@ -479,6 +479,7 @@ class Sudoku(object):
         return None
 
 class Puzzle(object):
+    """ Create a random puzzle """
     def __init__(self):
         return
     def pattern(self, r, c):    
